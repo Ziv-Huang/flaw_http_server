@@ -5,6 +5,10 @@ import (
 	"flaw_http_server/usecase/api"
 	"sync"
 
+	_ "flaw_http_server/docs"
+
+	"github.com/swaggo/fiber-swagger" // fiber-swagger middleware
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -17,6 +21,21 @@ func NewHttpFiber(wg *sync.WaitGroup, config configs.Configuration) *httpFiber {
 	return &httpFiber{Wg: wg, Config: config}
 }
 
+// @title Fiber Swagger Example API
+// @version 2.0
+// @description This is a sample server server.
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:8122
+// @BasePath /
+// @schemes http
 func (s *httpFiber) Start() {
 
 	go func() {
@@ -32,6 +51,9 @@ func (s *httpFiber) Start() {
 		app.Get("/result/:id", api.GetResultByID)
 		app.Post("/job", api.CreateAJob)
 		app.Delete("/job/:id", api.DeleteAJob)
+
+		// Fiber swagger
+		app.Get("/swagger/*", fiberSwagger.WrapHandler)
 
 		// Start server
 		app.Listen(":" + s.Config.Http.Port)
