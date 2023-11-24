@@ -6,16 +6,37 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// @Summary		Hello
+// @Description	Hello World
+// @Tags			Hello
+// @Accept			json
+// @Produce		json
+// @Success		200
+// @Router			/ [get]
 func Hello(c *fiber.Ctx) error {
 	c.Status(200)
 	return c.SendString("Hello, World 👋!")
 }
 
+// @Summary		Heartbeat
+// @Description	Heartbeat
+// @Tags			Heartbeat
+// @Accept			json
+// @Produce		json
+// @Success		200
+// @Router			/heartbeat [get]
 func Heartbeat(c *fiber.Ctx) error {
 	c.Status(200)
 	return c.SendString("OK")
 }
 
+// @Summary		Get Device Info
+// @Description	Get Device Info
+// @Tags			Get Device Info
+// @Accept			json
+// @Produce		json
+// @Success		200
+// @Router			/deviceinfo [get]
 func GetDeviceInfo(c *fiber.Ctx) error {
 	// TODO
 	var result request.DeviceInfo
@@ -25,6 +46,13 @@ func GetDeviceInfo(c *fiber.Ctx) error {
 	return c.JSON(result)
 }
 
+// @Summary		Create A Job
+// @Description	Create A Job
+// @Tags			Create A Job
+// @Accept			json
+// @Produce		json
+// @Success		200
+// @Router			/job [post]
 func CreateAJob(c *fiber.Ctx) error {
 	// TODO
 	var result request.Task
@@ -36,6 +64,13 @@ func CreateAJob(c *fiber.Ctx) error {
 	return c.JSON(result)
 }
 
+// @Summary		Delete A Job
+// @Description	Delete A Job
+// @Tags			Delete A Job
+// @Accept			json
+// @Produce		json
+// @Success		200
+// @Router			/job/:id [delete]
 func DeleteAJob(c *fiber.Ctx) error {
 	// TODO
 	var result request.Task
@@ -47,6 +82,13 @@ func DeleteAJob(c *fiber.Ctx) error {
 	return c.JSON(result)
 }
 
+// @Summary		Get Result
+// @Description	Get Result
+// @Tags			Get Result
+// @Accept			json
+// @Produce		json
+// @Success		200
+// @Router			/result/:id [get]
 func GetResultByID(c *fiber.Ctx) error {
 	// TODO
 	var result request.Result
